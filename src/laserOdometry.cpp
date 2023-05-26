@@ -590,7 +590,10 @@ int main(int argc, char **argv)
                 pubLaserCloudFullRes.publish(laserCloudFullRes3);
             }
             printf("publication time %f ms \n", t_pub.toc());
-            printf("whole laserOdometry time %f ms \n \n", t_whole.toc());
+            double whole_time = t_whole.toc();
+            printf("whole laserOdometry time %f ms \n \n", whole_time);
+            static std::ofstream out("/home/arcs/cw_aloam/time.csv");
+            out<<whole_time<<','<<std::endl;
             if(t_whole.toc() > 100)
                 ROS_WARN("odometry process over 100ms");
 
